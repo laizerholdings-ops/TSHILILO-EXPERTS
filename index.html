@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tshililo Garden Experts | Professional Grass Supply & Installation</title>
+    <meta name="description" content="Tshililo Garden Experts provides premium LM, Kikuyu, and Evergreen grass supply and professional installation services across South Africa.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        /* Theme Foundation */
+        .dark body { background-color: #020617; color: #ffffff; }
+        body:not(.dark) { background-color: #ffffff; color: #0f172a; }
+
+        /* Animations */
+        @keyframes ken-burns {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        .animate-ken-burns { animation: ken-burns 30s ease-in-out infinite; }
+
+        @keyframes text-glow {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(34, 197, 94, 0.3)); }
+            50% { filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.6)); }
+        }
+        .animate-text-glow { animation: text-glow 4s ease-in-out infinite; }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .whatsapp-pulse { animation: pulse-green 2s infinite; }
+
+        .text-shimmer {
+            background: linear-gradient(to right, #22C55E 20%, #ffffff 40%, #ffffff 60%, #22C55E 80%);
+            background-size: 200% auto;
+            color: #22C55E;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 4s linear infinite;
+        }
+        @keyframes textShimmer { to { background-position: 200% center; } }
+
+        /* UI Elements - Artisan Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+        .dark .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        body:not(.dark) .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(34, 197, 94, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Video Background Styling */
+        .video-bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background-color: #064e3b;
+        }
+        .video-bg-container video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.4), rgba(2, 6, 23, 0.95));
+            z-index: 1;
+        }
+        .light .video-overlay {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.95));
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        .active-faq .faq-content {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 1.5rem;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #22C55E; }
+    </style>
+</head>
+<body class="dark overflow-x-hidden" id="home">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="relative w-24 h-24">
+            <div class="absolute inset-0 border-4 border-white/5 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-t-[#22C55E] rounded-full animate-spin"></div>
+        </div>
+    </div>
+
+    <!-- Video Background Engine -->
+    <div class="video-bg-container">
+        <video id="bgVideo" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1533460004989-cee19ad72752?auto=format&fit=crop&q=80">
+            <!-- Points to your local file background.mp4 -->
+            <source src="background.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 py-4 transition-all duration-700 top-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center px-4 sm:px-6 py-4 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-xl bg-slate-900/95 dark:bg-slate-900/95 bg-white/95">
+                <div class="flex items-center space-x-3 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center text-slate-950 font-black shadow-lg">TG</div>
+                    <div class="flex flex-col">
+                        <span class="font-black text-lg tracking-tighter uppercase leading-none dark:text-white text-slate-950">TSHILILO <span class="text-brand-500">EXPERTS</span></span>
+                        <span class="text-[8px] font-bold tracking-[0.4em] uppercase opacity-70 dark:text-white text-slate-950">Engineering Arboreal Excellence</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="text-[10px] font-black uppercase tracking-widest hover:text-brand-500 transition-colors dark:text-white text-slate-950">Home</a>
+                    <a href="#services" class="text-[10px] font-black uppercase tracking-widest hover:text-brand-500 transition-colors dark:text-white text-slate-950">Services</a>
+                    <a href="#about" class="text-[10px] font-black uppercase tracking-widest hover:text-brand-500 transition-colors dark:text-white text-slate-950">About Us</a>
+                    <a href="#contact" class="text-[10px] font-black uppercase tracking-widest hover:text-brand-500 transition-colors dark:text-white text-slate-950">Contacts</a>
+                    
+                    <button id="theme-toggle" class="p-2 rounded-xl glass-card border-none hover:bg-brand-500/20 transition-all">
+                        <i data-lucide="sun" class="hidden dark:block text-brand-500"></i>
+                        <i data-lucide="moon" class="block dark:hidden text-slate-950"></i>
+                    </button>
+
+                    <a href="tel:0658151480" class="px-6 py-3 bg-brand-500 text-slate-950 rounded-xl font-bold hover:brightness-110 transition-all shadow-lg uppercase text-[10px] tracking-widest">Call Dispatch</a>
+                </div>
+                
+                <div class="lg:hidden flex items-center space-x-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-xl glass-card border-none">
+                        <i data-lucide="sun" class="hidden dark:block text-brand-500"></i>
+                        <i data-lucide="moon" class="block dark:hidden text-slate-950"></i>
+                    </button>
+                    <button id="menu-toggle" class="dark:text-white text-slate-900 p-2">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-24 left-4 right-4 dark:bg-slate-900 bg-white border border-white/10 rounded-2xl p-6 shadow-2xl lg:hidden">
+            <div class="flex flex-col space-y-6 text-center">
+                <a href="#home" class="mobile-link text-xs font-black uppercase tracking-widest dark:text-white text-slate-950">Home</a>
+                <a href="#services" class="mobile-link text-xs font-black uppercase tracking-widest dark:text-white text-slate-950">Services</a>
+                <a href="#about" class="mobile-link text-xs font-black uppercase tracking-widest dark:text-white text-slate-950">About Us</a>
+                <a href="#contact" class="mobile-link text-xs font-black uppercase tracking-widest dark:text-white text-slate-950">Contacts</a>
+                <a href="tel:0658151480" class="bg-brand-500 text-slate-950 py-4 rounded-xl font-black uppercase text-xs tracking-widest">Call Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-24 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8 text-center lg:text-left reveal">
+                <div class="inline-flex items-center space-x-2 px-4 py-2 bg-brand-500/10 border border-brand-500/20 rounded-full">
+                    <span class="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></span>
+                    <span class="text-brand-500 text-[10px] font-black uppercase tracking-[0.3em]">Quality Grass & Pro Installation</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter uppercase dark:text-white text-slate-900">
+                    Quality Grass <br />
+                    <span class="text-shimmer animate-text-glow">& Pro Installation</span> <br />
+                    Across South Africa.
+                </h1>
+                <p class="text-lg md:text-xl max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed dark:text-slate-400 text-slate-600">
+                    Tshililo Garden Experts: Engineering your perfect outdoor sanctuary with premium varieties and meticulous site preparation.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-6">
+                    <a href="tel:0658151480" class="px-10 py-5 bg-brand-500 text-slate-950 font-black rounded-2xl shadow-2xl hover:scale-105 transition-all flex items-center justify-center uppercase tracking-widest text-xs">
+                        Call Now <i data-lucide="phone" class="ml-3 w-4 h-4"></i>
+                    </a>
+                    <a href="https://wa.me/27658151480" class="px-10 py-5 glass-card font-black rounded-2xl border border-white/10 transition-all uppercase tracking-widest text-xs flex items-center justify-center hover:bg-white/5 dark:text-white text-slate-950">
+                        WhatsApp Us
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hidden lg:block relative reveal" style="transition-delay: 200ms;">
+                <div class="relative z-10 rounded-[3.5rem] overflow-hidden shadow-2xl border border-white/10 transform rotate-3 hover:rotate-0 transition-all duration-1000 aspect-square group">
+                    <img src="https://images.unsplash.com/photo-1558905619-17142b2f6746?auto=format&fit=crop&w=800&q=80" alt="Lush Grass" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[4000ms]" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
+                </div>
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-brand-500/10 blur-[100px] rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 relative overflow-hidden bg-slate-950/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center space-y-4 mb-24 reveal">
+                <h2 class="text-brand-500 font-black tracking-[0.4em] uppercase text-[11px]">Core Infrastructure</h2>
+                <h3 class="text-4xl md:text-5xl font-black tracking-tighter uppercase dark:text-white text-slate-900">Professional Services</h3>
+                <div class="w-24 h-2 bg-brand-500 mx-auto rounded-full mt-4 opacity-50"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <div class="glass-card p-10 rounded-[2.5rem] flex flex-col border-l-4 border-l-brand-500 reveal">
+                    <div class="w-14 h-14 bg-brand-500 rounded-2xl flex items-center justify-center mb-8 text-slate-950">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h4 class="text-2xl font-black mb-4 uppercase tracking-tighter dark:text-white text-slate-900">Expert Installation</h4>
+                    <p class="text-sm font-medium opacity-70 leading-relaxed flex-grow dark:text-slate-400 text-slate-600">
+                        Our veterans manage the scientific installation of your instant lawn. This involves precision alignment to avoid visible seams and mechanical rolling to eliminate air pockets, ensuring immediate root-to-soil synergy for rapid growth and a carpet-like finish. We handle everything from residential porches to massive sports fields.
+                    </p>
+                </div>
+                <div class="glass-card p-10 rounded-[2.5rem] flex flex-col border-l-4 border-l-brand-600 reveal" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-brand-600 rounded-2xl flex items-center justify-center mb-8 text-slate-950">
+                        <i data-lucide="truck"></i>
+                    </div>
+                    <h4 class="text-2xl font-black mb-4 uppercase tracking-tighter dark:text-white text-slate-900">National Delivery</h4>
+                    <p class="text-sm font-medium opacity-70 leading-relaxed flex-grow dark:text-slate-400 text-slate-600">
+                        Freshness is the key to root viability. We operate a specialized logistics network that ensures your grass is harvested and delivered to your site within 24 hours. We serve residential neighborhoods, office parks, and commercial developments across South Africa with temperature-monitored transit systems.
+                    </p>
+                </div>
+                <div class="glass-card p-10 rounded-[2.5rem] flex flex-col border-l-4 border-l-brand-700 reveal" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-brand-700 rounded-2xl flex items-center justify-center mb-8 text-slate-950">
+                        <i data-lucide="shrub"></i>
+                    </div>
+                    <h4 class="text-2xl font-black mb-4 uppercase tracking-tighter dark:text-white text-slate-900">Structural Prep</h4>
+                    <p class="text-sm font-medium opacity-70 leading-relaxed flex-grow dark:text-slate-400 text-slate-600">
+                        A great lawn starts underground. Our preparation process includes deep-root weed sterilization, organic nutrient infusion, and high-precision mechanical leveling. This scientific foundation prevents future undulations and ensures your selected variety thrives in its new environment.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grass Description Detail -->
+            <div class="reveal mt-12 bg-white/5 backdrop-blur-md rounded-[3rem] p-8 md:p-16 border border-white/10">
+                <div class="grid lg:grid-cols-3 gap-12 text-center lg:text-left">
+                    <div>
+                        <h4 class="text-brand-500 font-black uppercase text-xl mb-4">LM Grass</h4>
+                        <p class="text-sm opacity-70 leading-relaxed mb-4">Optimized for shaded properties. Features a soft leaf texture that remains lush with minimal sunlight. Perfect for gardens with established tree canopies.</p>
+                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-40">Shade Tolerant • Soft Texture</div>
+                    </div>
+                    <div>
+                        <h4 class="text-brand-500 font-black uppercase text-xl mb-4">Kikuyu Grass</h4>
+                        <p class="text-sm opacity-70 leading-relaxed mb-4">The durability king. Thrives in full sun and is engineered for high-traffic areas and rapid solar recovery. Ideal for family yards and sports facilities.</p>
+                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-40">Full Sun • High Traffic</div>
+                    </div>
+                    <div>
+                        <h4 class="text-brand-500 font-black uppercase text-xl mb-4">Evergreen</h4>
+                        <p class="text-sm opacity-70 leading-relaxed mb-4">Maintains its deep-green profile throughout the winter months, providing a luxurious aesthetic appeal all year long with proper hydration.</p>
+                        <div class="text-[10px] font-bold uppercase tracking-widest opacity-40">Year-Round • Luxury Appeal</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal space-y-8">
+                <div class="space-y-4">
+                    <h2 class="text-brand-500 font-black uppercase tracking-[0.4em] text-[11px]">The Heritage</h2>
+                    <h3 class="text-5xl font-black uppercase tracking-tighter dark:text-white text-slate-950">Tshililo Garden <br /> Experts.</h3>
+                    <div class="w-24 h-2 bg-brand-500 rounded-full opacity-50"></div>
+                </div>
+                
+                <div class="space-y-6 dark:text-slate-400 text-slate-600 font-medium leading-relaxed">
+                    <p class="text-lg">Tshililo Garden Experts is more than a landscaping firm; we are biological engineers dedicated to the science of the perfect green space. Founded on the principle that a lawn is the heartbeat of a property's ecosystem.</p>
+                    
+                    <div class="glass-card p-6 rounded-2xl border-l-4 border-brand-500">
+                        <h4 class="font-bold text-brand-500 mb-2 uppercase text-xs tracking-widest">Learn More About Our Company</h4>
+                        <p class="text-sm italic">We believe in empowering our audience. Every project begins with a soil analysis and site consultation where we educate clients on the best grass varieties for their specific drainage and solar mapping. Our legacy is built on bridging the gap between meticulous garden aesthetics and heavy-duty industrial site clearance, serving residential homes and major developers across South Africa.</p>
+                    </div>
+
+                    <p>With years of experience in the South African agricultural sector, we understand the local climate stressors. We handle everything from 10m² residential patches to 10,000m² industrial site restorations with an uncompromising focus on environmental integrity.</p>
+                </div>
+            </div>
+            
+            <div class="relative reveal" style="transition-delay: 300ms;">
+                <div class="relative z-10 rounded-[3.5rem] overflow-hidden shadow-2xl border border-white/10 aspect-square group">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="Work Site" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-32 relative bg-slate-950/20 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h3 class="text-5xl font-black uppercase tracking-tighter mb-16 text-center dark:text-white text-slate-950">Verified Dispatch Logs.</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-8 rounded-3xl flex flex-col">
+                    <i data-lucide="quote" class="text-brand-500 opacity-20 mb-4"></i>
+                    <p class="text-sm dark:text-slate-300 text-slate-600 italic mb-6">"Fantastic service! Tshililo's team arrived early in Sandton, prepped the soil properly, and laid the Kikuyu perfectly."</p>
+                    <div class="mt-auto">
+                        <p class="font-black text-xs uppercase dark:text-white text-slate-950">Sipho M.</p>
+                        <p class="text-[10px] text-brand-500 font-bold uppercase tracking-widest">Gauteng</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl flex flex-col">
+                    <i data-lucide="quote" class="text-brand-500 opacity-20 mb-4"></i>
+                    <p class="text-sm dark:text-slate-300 text-slate-600 italic mb-6">"I ordered LM grass for my shaded porch. They delivered on time and gave great maintenance advice. High quality."</p>
+                    <div class="mt-auto">
+                        <p class="font-black text-xs uppercase dark:text-white text-slate-950">Charlize v.d. Merwe</p>
+                        <p class="text-[10px] text-brand-500 font-bold uppercase tracking-widest">Pretoria East</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl flex flex-col">
+                    <i data-lucide="quote" class="text-brand-500 opacity-20 mb-4"></i>
+                    <p class="text-sm dark:text-slate-300 text-slate-600 italic mb-6">"Professional team, handled everything from clearing the site to final rolling. Highly recommended for commercial jobs."</p>
+                    <div class="mt-auto">
+                        <p class="font-black text-xs uppercase dark:text-white text-slate-950">David Thompson</p>
+                        <p class="text-[10px] text-brand-500 font-bold uppercase tracking-widest">Cape Town</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl flex flex-col">
+                    <i data-lucide="quote" class="text-brand-500 opacity-20 mb-4"></i>
+                    <p class="text-sm dark:text-slate-300 text-slate-600 italic mb-6">"Best price I could find for Evergreen. The quality is world-class and the installation was incredibly efficient."</p>
+                    <div class="mt-auto">
+                        <p class="font-black text-xs uppercase dark:text-white text-slate-950">Lerato Molefe</p>
+                        <p class="text-[10px] text-brand-500 font-bold uppercase tracking-widest">Durban</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-32 relative reveal">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <h3 class="text-5xl font-black uppercase tracking-tighter mb-16 text-center dark:text-white text-slate-950">Technical Knowledge Base.</h3>
+            <div class="space-y-4">
+                <div class="glass-card rounded-2xl overflow-hidden faq-item">
+                    <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors faq-btn">
+                        <span class="font-black text-xs uppercase tracking-widest dark:text-white text-slate-900">Which grass is best for my yard?</span>
+                        <i data-lucide="x" class="text-brand-500 w-4 h-4 rotate-45 transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 text-sm font-medium dark:text-slate-400 text-slate-600 border-t border-white/5 pt-4">
+                        It depends on sun exposure. Kikuyu is best for full sun and high traffic. LM Grass is ideal for semi-shade areas. Evergreen is great if you want a perfect green look all year round with proper irrigation.
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden faq-item">
+                    <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors faq-btn">
+                        <span class="font-black text-xs uppercase tracking-widest dark:text-white text-slate-900">How long does installation take?</span>
+                        <i data-lucide="x" class="text-brand-500 w-4 h-4 rotate-45 transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 text-sm font-medium dark:text-slate-400 text-slate-600 border-t border-white/5 pt-4">
+                        Most residential yards are completed within 1 to 2 days. Large commercial projects take longer, but our team works efficiently to ensure minimal disruption to your site.
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden faq-item">
+                    <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors faq-btn">
+                        <span class="font-black text-xs uppercase tracking-widest dark:text-white text-slate-900">Do you offer delivery?</span>
+                        <i data-lucide="x" class="text-brand-500 w-4 h-4 rotate-45 transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 text-sm font-medium dark:text-slate-400 text-slate-600 border-t border-white/5 pt-4">
+                        Yes, we offer fast and reliable delivery services across major regions in South Africa. We ensure the grass arrives fresh and ready for immediate planting.
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden faq-item">
+                    <button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors faq-btn">
+                        <span class="font-black text-xs uppercase tracking-widest dark:text-white text-slate-900">Maintenance after installation?</span>
+                        <i data-lucide="x" class="text-brand-500 w-4 h-4 rotate-45 transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 text-sm font-medium dark:text-slate-400 text-slate-600 border-t border-white/5 pt-4">
+                        Watering is crucial for the first 2-3 weeks. Ensure the soil stays moist but not flooded. Avoid heavy walking on the new lawn during this period. We provide a full maintenance guide after every installation.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 relative reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="space-y-12 text-center lg:text-left">
+                <h3 class="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] dark:text-white text-slate-900">
+                    Secure <br />
+                    <span class="text-brand-500 text-shimmer animate-text-glow">The View.</span> <br />
+                    Now.
+                </h3>
+                <div class="flex items-center space-x-6 group cursor-pointer justify-center lg:justify-start" onclick="location.href='tel:0658151480'">
+                    <div class="w-16 h-16 glass-card rounded-2xl flex items-center justify-center text-brand-500 group-hover:bg-brand-500 group-hover:text-slate-950 transition-all shadow-xl">
+                        <i data-lucide="phone"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[10px] font-black uppercase mb-1 text-slate-500">Service Hotline</p>
+                        <p class="text-2xl font-black leading-none dark:text-white text-slate-900">065 815 1480</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 sm:p-12 rounded-[2.5rem] shadow-2xl">
+                <form class="space-y-6" id="contactForm" onsubmit="event.preventDefault(); showSuccess();">
+                    <h4 class="text-3xl font-black mb-8 uppercase tracking-tighter dark:text-white text-slate-900">Dispatch Request</h4>
+                    <input type="text" placeholder="Protocol Name" class="w-full glass-card bg-white/5 border-none rounded-xl p-5 outline-none focus:ring-2 focus:ring-brand-500 dark:text-white text-slate-900" required />
+                    <input type="tel" placeholder="Dispatch Contact" class="w-full glass-card bg-white/5 border-none rounded-xl p-5 outline-none focus:ring-2 focus:ring-brand-500 dark:text-white text-slate-900" required />
+                    <textarea placeholder="Tell us about your project area..." class="w-full glass-card bg-white/5 border-none rounded-xl p-5 outline-none focus:ring-2 focus:ring-brand-500 dark:text-white text-slate-900 h-32"></textarea>
+                    <button class="w-full bg-brand-500 text-slate-950 font-black py-6 rounded-2xl shadow-2xl hover:brightness-110 transition-all uppercase tracking-[0.3em] text-[10px]">Transmit Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 bg-slate-950/90 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-8">
+                <div class="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center text-slate-950 font-black">TG</div>
+                <h4 class="text-xl font-black tracking-tighter uppercase text-white">TSHILILO GARDEN EXPERTS</h4>
+            </div>
+            <p class="text-xs font-medium opacity-50 text-white">© 2026 TSHILILO GARDEN EXPERTS. ALL RIGHTS RESERVED. <br /> PROFESSIONAL INSTANT LAWN SUPPLY & INSTALLATION | SOUTH AFRICA.</p>
+        </div>
+    </footer>
+
+    <!-- Official WhatsApp Branding Button -->
+    <a href="https://wa.me/27658151480" target="_blank" class="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all whatsapp-pulse" id="floating-wa" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.43 5.623 1.43h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <script>
+        // Lucide Icon Init
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+        [themeBtn, themeBtnMob].forEach(b => b.onclick = () => {
+            document.documentElement.classList.toggle('dark');
+            lucide.createIcons();
+        });
+
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.onclick = () => mobileMenu.classList.toggle('hidden');
+        document.querySelectorAll('.mobile-link').forEach(l => l.onclick = () => mobileMenu.classList.add('hidden'));
+
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.onclick = () => {
+                const item = btn.parentElement;
+                const icon = btn.querySelector('i');
+                const isOpen = item.classList.contains('active-faq');
+                
+                document.querySelectorAll('.faq-item').forEach(f => {
+                    f.classList.remove('active-faq');
+                    f.querySelector('i').style.transform = 'rotate(45deg)';
+                });
+
+                if (!isOpen) {
+                    item.classList.add('active-faq');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            };
+        });
+
+        // Scroll Reveal Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Navbar visibility on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.remove('top-4');
+                nav.classList.add('top-0');
+            } else {
+                nav.classList.add('top-4');
+                nav.classList.remove('top-0');
+            }
+        });
+
+        // Form UX Feedback
+        function showSuccess() {
+            const btn = document.querySelector('#contactForm button');
+            const originalText = btn.innerText;
+            btn.innerText = "TRANSMITTED SUCCESSFULLY";
+            btn.classList.add('bg-white', 'text-brand-600');
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.classList.remove('bg-white', 'text-brand-600');
+                document.getElementById('contactForm').reset();
+            }, 3000);
+        }
+
+        // Preloader Exit
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('loaded');
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
